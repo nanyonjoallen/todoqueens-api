@@ -1,20 +1,19 @@
- 
-//  const login = require('./login');
-//  console.log(login);
-
 const express = require('express');
-//initialise express instance
-const app = express();//import express
+const bodyParser= require('body-parser');
+//import routes
+const reviewRoutes = require ('./routes/reviews.routes');
 
-// respond with "hello world" when a GET request is made to the homepage
-//res-response
-//request
-//declare an endpoint
-app.use('/',(req,res, next)=> {
-    //send method
-    res.sendFile('hello world')
-});
+//create an express instance
+const app = express();
+
+//.use - calls middle ware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());//data recoded form the form
+app.use('/reviews', reviewRoutes.router);
+app.use('/reviews', reviewRoutes.router);
 
 
 //listen and start the sever
+let port = 3000;
 app.listen(3000,() => console.log('sever port is 3000'))
+
